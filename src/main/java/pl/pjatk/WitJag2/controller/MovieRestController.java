@@ -20,25 +20,13 @@ public class MovieRestController {
         this.movieService = movieService;
     }
 
-
     @GetMapping("/model")
-
-    public ResponseEntity<Movie> getCar() {
+    public ResponseEntity<Movie> getMovie() {
         Movie BeeMovie = MovieService.getMovie((long) 1);
         return ResponseEntity.ok(BeeMovie);
     }
 
-    @PostMapping("/model")
-    public ResponseEntity<Movie> getCarPost(@RequestBody Movie movie) {
 
-        return ResponseEntity.ok(movie);
-    }
-
-    @GetMapping("/exeption")
-    public ResponseEntity<String> throwExeption() {
-        movieService.throwException("Testing bla bla bla");
-        return ResponseEntity.ok().build();
-    }
 
     @GetMapping("/movies")
     public ResponseEntity<List<Movie>> getAllMovies() {
