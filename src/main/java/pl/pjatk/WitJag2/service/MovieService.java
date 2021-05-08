@@ -13,9 +13,9 @@ public class MovieService {
 
 
     public static List<Movie> getAllMovies() {
-        Movie firstMovie = new Movie(1L);
-        Movie secoundMovie = new Movie(2l);
-        Movie thirdMovie = new Movie(3l);
+        Movie firstMovie = new Movie(1L,"Beemovie","animation");
+        Movie secoundMovie = new Movie(2l,"Dzien Swira","comedy");
+        Movie thirdMovie = new Movie(3l,"Chlopaki nie placza","comedy");
         return List.of(
                 firstMovie,
                 secoundMovie,
@@ -25,7 +25,7 @@ public class MovieService {
     }
 
 
-    public static Movie getMovie(Long id) {
+    public static Movie getMovie(Long id,) {
         return new Movie(id);
     }
 
