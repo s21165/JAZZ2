@@ -23,14 +23,5 @@ public class MovieService {
 
         );
     }
-
-
-    public static Movie getMovie(Long id,) {
-        return new Movie(id);
-    }
-
-    public void throwException(String message) {
-        throw new RuntimeException(message);
-    }
 }
 
