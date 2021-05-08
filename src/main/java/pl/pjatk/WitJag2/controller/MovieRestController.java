@@ -22,9 +22,13 @@ public class MovieRestController {
 
     @GetMapping("/model")
     public ResponseEntity<Movie> getMovie() {
-        Movie BeeMovie = MovieService.getMovie((long) 1);
+        Movie BeeMovie = MovieService.getMovie((long) 1,"Beemovie","animation");
         return ResponseEntity.ok(BeeMovie);
     }
+
+
+
+
 
 
 

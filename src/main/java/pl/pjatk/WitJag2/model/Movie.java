@@ -12,6 +12,8 @@ package pl.pjatk.WitJag2.model;
             this.category = category;
         }
 
+
+
         public String getName() {
             return name;
         }

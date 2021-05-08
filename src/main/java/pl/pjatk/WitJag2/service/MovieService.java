@@ -24,7 +24,13 @@ public class MovieService {
         );
     }
 
-    public static Movie getMovie( long l) {
+
+
+    public static Movie getMovie( Long id,String name, String category) {
+        return new Movie(id,name,category);
+
+
+
     }
 }
 
