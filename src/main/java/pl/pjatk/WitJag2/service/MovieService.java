@@ -1,6 +1,8 @@
 package pl.pjatk.WitJag2.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import pl.pjatk.WitJag2.model.Category;
 import pl.pjatk.WitJag2.model.Movie;
 
@@ -39,7 +41,9 @@ public class MovieService {
         for (Movie movie : this.movies) {
             if (movie.getId().equals(movieId)) {
                 return movie;
-            }
+            } else throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
         }
         return null;
     }
