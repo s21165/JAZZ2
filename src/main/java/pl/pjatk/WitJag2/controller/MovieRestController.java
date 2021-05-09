@@ -1,6 +1,7 @@
 package pl.pjatk.WitJag2.controller;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -11,31 +12,60 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/movies")
 public class MovieRestController {
-
-    private final MovieService movieService;
-
+    private MovieService movieService;
     public MovieRestController(MovieService movieService) {
         this.movieService = movieService;
     }
 
-    @GetMapping("/model")
-    public ResponseEntity<Movie> getMovie() {
-        Movie BeeMovie = MovieService.getMovie((long) 1,"Beemovie","animation");
-        return ResponseEntity.ok(BeeMovie);
+
+    @GetMapping()
+    public ResponseEntity<List<Movie>> getMovies() {
+        return ResponseEntity.ok(this.movieService.getAllMovies());
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+        return ResponseEntity.ok(this.movieService.getMovie(id));
+    }
+
+    @PostMapping()
+    public ResponseEntity addMovie(@RequestBody Movie movieToAdd){
+        List<Movie> movies = this.movieService.addMovie(movieToAdd);
+
+        if(movies == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok().build();
     }
 
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
+        boolean isRemoved = this.movieService.removeMovie(id);
+        if(isRemoved) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
 
-
-
-
-    @GetMapping("/movies")
-    public ResponseEntity<List<Movie>> getAllMovies() {
-        return ResponseEntity.ok(MovieService.getAllMovies());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movieToUpdate){
+        Movie movie = this.movieService.update(movieToUpdate);
+
+        if(movie == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok().build();
+    }
 }
+
+
+
+
