@@ -1,6 +1,6 @@
 package pl.pjatk.WitJag2.model;
 
-public enum Category  {
+public enum Category {
     horror,
     comedy,
     fantasy,

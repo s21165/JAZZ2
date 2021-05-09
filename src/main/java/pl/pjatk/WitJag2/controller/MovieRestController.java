@@ -3,7 +3,6 @@ package pl.pjatk.WitJag2.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import pl.pjatk.WitJag2.model.Movie;
 import pl.pjatk.WitJag2.service.MovieService;
@@ -15,6 +14,7 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieRestController {
     private MovieService movieService;
+
     public MovieRestController(MovieService movieService) {
         this.movieService = movieService;
     }
@@ -32,21 +32,20 @@ public class MovieRestController {
     }
 
     @PostMapping()
-    public ResponseEntity addMovie(@RequestBody Movie movieToAdd){
+    public ResponseEntity addMovie(@RequestBody Movie movieToAdd) {
         List<Movie> movies = this.movieService.addMovie(movieToAdd);
 
-        if(movies == null) {
+        if (movies == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.ok().build();
     }
 
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         boolean isRemoved = this.movieService.removeMovie(id);
-        if(isRemoved) {
+        if (isRemoved) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
@@ -54,12 +53,11 @@ public class MovieRestController {
     }
 
 
-
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movieToUpdate){
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movieToUpdate) {
         Movie movie = this.movieService.update(movieToUpdate);
 
-        if(movie == null) {
+        if (movie == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.ok().build();
